@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_edit"
+        android:title="Edit"
+        android:icon="@android:drawable/ic_menu_edit"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_fake"
+        android:title="Fake News"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_thread"
+        android:title="Fake Thread"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_internet"
+        android:title="Async Internet"
+        android:icon="@android:drawable/ic_input_get"
+        app:showAsAction="always" />
+</menu>
