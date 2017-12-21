@@ -27,6 +27,8 @@ public class SeveralActivity extends AppCompatActivity {
         RSS3Adapter adapter = new RSS3Adapter();
         rv.setAdapter(adapter);
 
+
+        /* ASYNCTASKS NOT PARALLEL HERE : */
         Log.i("Several","Launching Async task...");
         _task = new XMLAsyncTask(adapter);
         _task.execute("http://www.lemonde.fr/rss/une.xml");
@@ -38,6 +40,7 @@ public class SeveralActivity extends AppCompatActivity {
         _task1.execute("https://www.melty.fr/actu.rss");
         Log.i("Several","task fetching url 2 executed");
 
+        /* ENDING NOT PARALLEL ASYNC TASKS*/
     }
 
     @Override
