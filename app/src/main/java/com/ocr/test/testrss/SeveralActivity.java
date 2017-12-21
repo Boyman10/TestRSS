@@ -41,6 +41,8 @@ public class SeveralActivity extends AppCompatActivity {
         Log.i("Several","task fetching url 2 executed");
 
         /* ENDING NOT PARALLEL ASYNC TASKS*/
+
+        //https://developer.android.com/reference/android/os/AsyncTask.html
     }
 
     @Override
