@@ -91,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
                     myIntent = new Intent(MainActivity.this, InternetActivity.class);
                     startActivity(myIntent);
                     return true;
+
+                case R.id.action_several:
+                    /* DO EDIT*/
+                    Log.i("TEST_RSS","Clic on menu SEVERAL RSS FEEDS item to launch 3 RSS Activity");
+                    // we launch the second activity :
+                    myIntent = new Intent(MainActivity.this, SeveralActivity.class);
+                    startActivity(myIntent);
+                    return true;
             }
 
         return super.onOptionsItemSelected(item);

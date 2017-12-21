@@ -21,7 +21,8 @@
         <activity android:name=".RecycleActivity" />
         <activity android:name=".FakeActivity" />
         <activity android:name=".ThreadActivity" />
-        <activity android:name=".InternetActivity"></activity>
+        <activity android:name=".InternetActivity" />
+        <activity android:name=".SeveralActivity"></activity>
     </application>
 
 </manifest>

@@ -27,9 +27,12 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
 
     private DocumentConsumer _consumer;
 
+    // the consumer here being called is the ADAPTER
     public XMLAsyncTask(DocumentConsumer cons) {
 
         _consumer = cons;
+        Log.i("XMLAsyncTask","Constructor called - filling consumer data");
+
     }
 
     @Override
@@ -38,6 +41,7 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
 
         try {
 
+            Log.i("XMLAsyncTask","Entering background process - sleeping first :");
             // testing purpose to mimic internet connection
             Thread.sleep(seconds * 1000);
 
@@ -46,17 +50,22 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             InputStream stream = conn.getInputStream();
 
+            Log.i("XMLAsyncTask","Reading url document");
+
             try {
+
+                Log.i("XMLAsyncTask","Returning parsed document from stream using DocumentBuilderFactory");
+                //https://www.jmdoudoux.fr/java/dej/chap-dom.htm
                 return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(stream);
             }
             finally {
-
+                Log.i("XMLAsyncTask","Closing the stream");
                 stream.close();
             }
 
         }
         catch (InterruptedException e) {
-            Log.e("XMLAsyncTask", "Thread interrompu" , e);
+            Log.e("XMLAsyncTask", "Thread interrupted" , e);
             return null;
         }
         catch (Exception e) {
@@ -70,7 +79,7 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
     @Override
     protected void onPostExecute(Document result) {
 
-        Log.i("XMLAsyncTask","Async Task end ");
+        Log.i("XMLAsyncTask","Async Task ended - fill the consumer with document (iow : the adapter is retrieving the doc !)");
         _consumer.setXMLDocument(result);
 
     }

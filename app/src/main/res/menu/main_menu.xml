@@ -25,4 +25,10 @@
         android:title="Async Internet"
         android:icon="@android:drawable/ic_input_get"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_several"
+        android:title="Async 3 RSS"
+        android:icon="@android:drawable/ic_delete"
+        app:showAsAction="always" />
 </menu>

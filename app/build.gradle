@@ -36,5 +36,5 @@ dependencies {
     // Adding a new jar into libs
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    
+
 }
