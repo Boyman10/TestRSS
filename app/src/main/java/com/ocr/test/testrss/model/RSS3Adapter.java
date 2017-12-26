@@ -33,6 +33,10 @@ public class RSS3Adapter extends RecyclerView.Adapter<RSS3Adapter.ArticleViewHol
 
     private Document _doc = null;
 
+    // define background color differently based on URLs parameters for testing purposes tracking the ending tasks;
+    private int[] curColor = {Color.CYAN,Color.YELLOW};
+    private int ci = 0; // index of our colors array
+
     @Override
     public int getItemCount() {
         // Log.i("RSSAdapter","Retrieving onItemCount()");
@@ -61,7 +65,7 @@ public class RSS3Adapter extends RecyclerView.Adapter<RSS3Adapter.ArticleViewHol
     @Override
     public void onBindViewHolder(ArticleViewHolder holder, int position) {
 
-        Log.i("RSSAdapter","Calling onBindViewHolder");
+        Log.i("RSSAdapter","Calling onBindViewHolder - bind the doc from the adapter to the view holder");
 
         Element item = (Element)_doc.getElementsByTagName("item").item(position);
 
@@ -74,9 +78,16 @@ public class RSS3Adapter extends RecyclerView.Adapter<RSS3Adapter.ArticleViewHol
         /* TODO : Add elements to doc with the submitted one - if possible order by date
         * and change color depending on source of RSS :*/
         try {
-            if (_doc != null)
-                _doc = concatXmlDocuments(_doc,doc);
-            else _doc = doc;
+            if (_doc != null) {
+                    ++ci;
+                    _doc = concatXmlDocuments(_doc, doc);
+                    Log.i("RSS3setXMLDocument", "Next Call set Document with color " + ci );
+                }
+            else {
+                _doc = doc;
+                Log.i("RSS3setXMLDocument", "First time calling set Document with color " + ci );
+
+            }
         }
         catch (ParserConfigurationException | SAXException | IOException e) {
             Log.e("RSS3setXMLDocument", "Exception while concatening document" , e);
@@ -105,8 +116,8 @@ public class RSS3Adapter extends RecyclerView.Adapter<RSS3Adapter.ArticleViewHol
             _title.setText(elt.getElementsByTagName("title").item(0).getTextContent() +
                             elt.getElementsByTagName("pubDate").item(0).getTextContent());
 
-            _title.setBackgroundColor(Color.CYAN);
-            Log.i("Adapter_AViewHolder","we set the current element");
+            _title.setBackgroundColor(curColor[ci]);
+            Log.i("Adapter_AViewHolder","we set the current element with color : " + ci);
 
         }
     }

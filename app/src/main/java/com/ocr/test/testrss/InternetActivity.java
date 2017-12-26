@@ -23,7 +23,7 @@ public class InternetActivity extends AppCompatActivity {
         RSSAdapter adapter = new RSSAdapter();
         rv.setAdapter(adapter);
 
-        _task = new XMLAsyncTask(adapter);
+        _task = new XMLAsyncTask(adapter,3);
         _task.execute("https://fr.wikipedia.org/w/api.php?hidebots=1&days=7&limit=50&hideWikibase=1&action=feedrecentchanges&feedformat=rss");
 
     }

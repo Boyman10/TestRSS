@@ -26,24 +26,26 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
     }
 
     private DocumentConsumer _consumer;
+    private int nbSeconds = 0;
 
     // the consumer here being called is the ADAPTER
-    public XMLAsyncTask(DocumentConsumer cons) {
+    public XMLAsyncTask(DocumentConsumer cons, int nb) {
 
         _consumer = cons;
+
+        nbSeconds = nb;
         Log.i("XMLAsyncTask","Constructor called - filling consumer data");
 
     }
 
     @Override
     protected Document doInBackground(String... params) {
-        int seconds = 5;
 
         try {
 
             Log.i("XMLAsyncTask","Entering background process - sleeping first :");
             // testing purpose to mimic internet connection
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(nbSeconds * 1000);
 
             URL url = new URL(params[0]);
 
@@ -54,7 +56,7 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
 
             try {
 
-                Log.i("XMLAsyncTask","Returning parsed document from stream using DocumentBuilderFactory");
+                Log.i("XMLAsyncTask","Returning parsed document from stream using DocumentBuilderFactory - sec " + nbSeconds);
                 //https://www.jmdoudoux.fr/java/dej/chap-dom.htm
                 return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(stream);
             }
@@ -73,6 +75,7 @@ public class XMLAsyncTask  extends AsyncTask<String,Void,Document> {
             Log.e("XMLAsyncTask", "Exception while downloading" , e);
             throw new RuntimeException(e);
         }
+
 
     }
 
