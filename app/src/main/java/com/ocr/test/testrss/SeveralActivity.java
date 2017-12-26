@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.ocr.test.testrss.model.RSS3Adapter;
 import com.ocr.test.testrss.model.XMLAsyncTask;
@@ -39,6 +41,7 @@ public class SeveralActivity extends AppCompatActivity {
         //_task.execute("http://www.lemonde.fr/rss/une.xml");
         Log.i("Several","task fetching url 1 executed");
         StartAsyncTaskInParallel(_task,"http://www.lemonde.fr/rss/une.xml");
+
         // Other urls :
         //https://www.melty.fr/actu.rss
         _task1 = new XMLAsyncTask(adapter,1);
@@ -49,11 +52,23 @@ public class SeveralActivity extends AppCompatActivity {
 
         //https://developer.android.com/reference/android/os/AsyncTask.html
 /*
-        Log.i("Several","Launching Async task with multiple urls");
+        Log.i("Several","Launching Async task with multiple urls at once");
         _poolTask = new XmlPoolAsyncTask(adapter);
         _poolTask.execute("http://www.lemonde.fr/rss/une.xml","https://www.melty.fr/actu.rss");
         Log.i("Several","task fetching url 1 executed");
 */
+
+        // adding progress bar callback function to get notified when list fully loaded :
+        final ProgressBar progress = (ProgressBar) findViewById(R.id.progress);
+        // we Observe from the adapter :
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                // we remove the progress bar !
+                progress.setVisibility(View.GONE);
+            }
+        });
+
 
     }
 

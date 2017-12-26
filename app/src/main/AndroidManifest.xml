@@ -22,7 +22,9 @@
         <activity android:name=".FakeActivity" />
         <activity android:name=".ThreadActivity" />
         <activity android:name=".InternetActivity" />
-        <activity android:name=".SeveralActivity"></activity>
+        <activity android:name=".SeveralActivity" />
+        <activity android:name=".controller.FragActivity" />
+        <activity android:name=".controller.WebActivity"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,12 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.ocr.test.testrss.controller.FragActivity;
+import com.ocr.test.testrss.controller.WebActivity;
 
 import org.apache.commons.io.IOUtils;
 
@@ -17,8 +22,20 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    // button to launch fragment
+    private Button mButton, webButton;
+
+    public MainActivity () {
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Log.i("MAIN ACTIVITY","Calling onCreate - Perform initialization of all fragments and loaders.");
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,6 +48,44 @@ public class MainActivity extends AppCompatActivity {
         final TextView textView = (TextView) findViewById(R.id.textView);
         final InputStream stream = getResources().openRawResource(R.raw.content);
         final String test;
+
+        mButton = findViewById(R.id.mButton);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent myIntent;
+                // Code here executes on main thread after user presses button
+                Log.i("TEST_RSS","Launching fragment activity");
+                // we launch the second activity :
+                myIntent = new Intent(MainActivity.this, FragActivity.class);
+                myIntent.putExtra("saveTag","Waouh that's working nicely !! Intent all the way retrieved on my Fragment...");
+                myIntent.putExtra("title","My Fragment");
+                startActivity(myIntent);
+            }
+        });
+
+
+        // other activity holding a fragment :
+        webButton = findViewById(R.id.webButton);
+
+        webButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent myIntent;
+                // Code here executes on main thread after user presses button
+                Log.i("TEST_RSS","Launching fragment activity with web view");
+                // we launch the web activity :
+                myIntent = new Intent(MainActivity.this, WebActivity.class);
+                myIntent.putExtra("link","https://r-h-m.net");
+                myIntent.putExtra("title","My Fragment");
+                startActivity(myIntent);
+            }
+        });
+
+
+
+
 
         // needs compile 'org.apache.commons:commons-io:1.3.2'
         try {
@@ -103,4 +158,38 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //https://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        Log.i("MAIN ACTIVITY","Calling onStart - dispacth onStart to all fragments");
+
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        Log.i("MAIN ACTIVITY","Calling onStop - dispacth onStop to all fragments");
+
+    }
+
+    @Override
+    protected void onPostResume() {
+
+        super.onPostResume();
+        Log.i("MAIN ACTIVITY","Calling onPostResume - dispacth onResume to all fragments");
+
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        Log.i("MAIN ACTIVITY","Calling onResume - dispacth onResume");
+
+    }
+
 }

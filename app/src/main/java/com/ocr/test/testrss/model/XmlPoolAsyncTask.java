@@ -13,7 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by bob on 26/12/17.
  */
-
+@Deprecated
 public class XmlPoolAsyncTask extends AsyncTask<String,Void,Document> {
 
 
